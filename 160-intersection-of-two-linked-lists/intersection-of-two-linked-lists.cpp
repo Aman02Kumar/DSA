@@ -8,19 +8,37 @@
  */
 class Solution {
 public:
-    ListNode *getIntersectionNode(ListNode *h1  ,ListNode *h2 ) {
+    ListNode * ss(ListNode * s, ListNode *b,int x){
 
-            map<ListNode*,int> mp;
-            while(h1!=NULL){
-                mp[h1]++;
-                h1=h1->next;
+            while(x && b!=NULL){
+                x--;
+                b=b->next;
             }
 
-            while(h2!=NULL){
-                if(mp[h2] == 1) return h2;
-                h2 = h2->next;
-            }
-            return NULL;
-        
+            while (s != NULL && b != NULL && s != b) {
+            s = s->next;
+            b = b->next;
+        }
+            return s;
     }
+    ListNode *getIntersectionNode(ListNode * a, ListNode *b) {
+        
+        int n = 0,m=0;
+        ListNode * x = a;
+        ListNode * y = b;
+
+
+        while(a!=NULL){
+            n++;
+            a= a->next;
+        }
+        while(b!=NULL){
+            m++;
+            b= b->next;
+        }
+
+        if(n>m) return ss(y,x,n-m);
+        else return  ss(x,y,m-n);
+        // return NULL;
+}
 };
