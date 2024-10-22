@@ -8,16 +8,19 @@
  */
 class Solution {
 public:
-    ListNode *getIntersectionNode(ListNode *h ,ListNode *k) {
-        
-        while(h !=NULL){
-            ListNode * j = k;
-            while(j!=NULL){
-                if(h == j ) return h;
-                j = j->next;
+    ListNode *getIntersectionNode(ListNode *h1  ,ListNode *h2 ) {
+
+            map<ListNode*,int> mp;
+            while(h1!=NULL){
+                mp[h1]++;
+                h1=h1->next;
             }
-            h = h->next;
-        }
-        return NULL;
+
+            while(h2!=NULL){
+                if(mp[h2] == 1) return h2;
+                h2 = h2->next;
+            }
+            return NULL;
+        
     }
 };
