@@ -21,7 +21,7 @@ public:
             c++;
            
         }
-
+        // if(k%c==0) return head;
         temp->next = head;
         k = k %(c+1);
         int y = c - k;
