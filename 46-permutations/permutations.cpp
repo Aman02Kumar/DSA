@@ -1,31 +1,27 @@
 class Solution {
 public:
-    void find(vector<int> &nums, vector<int> &temp, vector<bool> &visited, vector<vector<int>> &ans) {
-        int n = nums.size();
 
-        if (temp.size() == n) {
-            ans.push_back(temp);
+    void find(vector<int>& nums , vector<vector<int>> &ans , int index ){
+
+        int n = nums.size();
+        if(index >= n){
+            ans.push_back(nums);
             return;
         }
 
-        for (int i = 0; i < n; i++) {
-            if (!visited[i]) {
-                visited[i] = 1;
-                temp.push_back(nums[i]);
-                find(nums, temp, visited, ans);
-                temp.pop_back();
-                visited[i] = 0;
-            }
+        for(int i= index ; i < n ; i++){
+
+                swap(nums[index],nums[i]);
+                find(nums,ans,index+1);
+                 swap(nums[index],nums[i]);
+
         }
     }
-
     vector<vector<int>> permute(vector<int>& nums) {
-        vector<vector<int>> ans;
-        int n = nums.size();
-        vector<bool> visited(n, 0);
-        vector<int> temp;
-
-        find(nums, temp, visited, ans);
+        
+        vector<vector<int >> ans;
+        int index = 0 ;
+        find(nums , ans , index);
         return ans;
     }
 };
