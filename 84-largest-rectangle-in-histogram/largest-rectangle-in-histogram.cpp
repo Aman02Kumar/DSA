@@ -29,7 +29,7 @@ public:
 
             for(int i =0; i < arr.size() ;i++){
 
-                while(!st.empty() && arr[st.top()] > arr[i]){
+                while(!st.empty() && arr[st.top()] >= arr[i]){
                     st.pop();
                 }
 
