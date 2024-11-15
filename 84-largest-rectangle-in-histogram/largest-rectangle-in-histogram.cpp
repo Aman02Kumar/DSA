@@ -1,55 +1,32 @@
 class Solution {
 public:
-
-    vector<int> nse(vector<int>& arr){
-
-            vector<int> ans(arr.size(),arr.size());
-            stack<int> st;
-
-            for(int i = arr.size()-1; i >= 0 ;i--){
-
-                while(!st.empty() && arr[st.top()] >= arr[i]){
-                    st.pop();
-                }
-
-                if(!st.empty()  ){
-                    ans[i] = st.top();
-                }
-
-                st.push(i);
+    int largestRectangleArea(vector<int>& heights) {
+        int n = heights.size();
+        stack<int>st;
+        int elm;
+        int nse;
+        int pse;
+        int ans = INT_MIN;
+        for(int i=0;i<n;i++)
+        {
+            while(!st.empty() && heights[st.top()]>heights[i])
+            {
+                elm = heights[st.top()];
+                st.pop();
+                nse = i;
+                pse = st.empty()?-1:st.top();
+                ans = max(ans,elm*(nse-pse-1));
             }
-            return ans;
-    }
-    
-
-    vector<int> pse(vector<int>& arr){
-
-            vector<int> ans2(arr.size(),-1);
-            stack<int> st;
-
-            for(int i =0; i < arr.size() ;i++){
-
-                while(!st.empty() && arr[st.top()] >= arr[i]){
-                    st.pop();
-                }
-
-                if(!st.empty()  ){
-                    ans2[i] = st.top();
-                }
-
-                st.push(i);
-            }
-            return ans2;
-    }
-    int largestRectangleArea(vector<int>& arr) {
-
-            int maxi = 0 ;
-            vector<int> right = nse(arr);
-            vector<int> left = pse(arr);
-
-            for(int i = 0 ; i < arr.size() ; i++){
-                    maxi =max(maxi , arr[i]*(right[i] - left[i] - 1 ));
-            }
-            return maxi;
+            st.push(i);
+        }
+        while(!st.empty())
+        {
+            nse = n;
+            elm = heights[st.top()];
+            st.pop();
+            pse = st.empty()?-1:st.top();
+            ans = max(ans,elm*(nse-pse-1));
+        }
+        return ans;
     }
 };
