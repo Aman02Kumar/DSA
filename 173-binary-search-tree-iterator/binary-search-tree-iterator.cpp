@@ -2,7 +2,10 @@ class BSTIterator {
 private: stack<TreeNode*>myStack;
 public:
     void pushAll(TreeNode* node){
-        for(; node != NULL; myStack.push(node),node=node->left);
+        while(node != NULL){
+             myStack.push(node);
+             node=node->left;
+    }
     }
     BSTIterator(TreeNode* root) {
         pushAll(root);
