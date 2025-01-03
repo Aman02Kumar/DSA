@@ -1,5 +1,7 @@
 class BSTIterator {
-private: stack<TreeNode*>myStack;
+public:
+
+stack<TreeNode*>myStack;
     void pushAll(TreeNode* node){
         while(node != NULL){
              myStack.push(node);
@@ -7,9 +9,6 @@ private: stack<TreeNode*>myStack;
     }
     }
 
-public:
-    
-    
     BSTIterator(TreeNode* root) {
         pushAll(root);
     }
