@@ -32,9 +32,9 @@ public:
         int color = image[sr][sc];
 
         // If the starting pixel already has the new color, return the image
-        if (color == newColor) {
-            return image;
-        }
+        // if (color == newColor) {
+        //     return image;
+        // }
 
         dfs(image, sr, sc, newColor, ans, visit, color);
         return ans;
