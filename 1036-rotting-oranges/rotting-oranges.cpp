@@ -16,7 +16,7 @@ public:
          }
         int maxtime = 0 ;
         int delx[] = {-1,0,1,0} ;
-        int dely[] = {0,1,0,-1} ;
+        int dely[] = {0,-1,0,1} ;
           while(!q.empty()){
             int x = q.front().first.first ;
             int y = q.front().first.second ;
