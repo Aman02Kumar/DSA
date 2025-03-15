@@ -1,20 +1,19 @@
 class Solution {
 public:
-    int hIndex(vector<int>& nums) {
-        
-        int  n = nums.size();
-        int l = 0; 
-        int h = n-1;
+    int hIndex(vector<int>& citations) {
+        int n = citations.size();
+        int left = 0, right = n - 1;
 
-        while(l<=h){
-            int mid = l + (h-l)/2;
+        while (left <= right) {
+            int mid = left + (right - left) / 2;
 
-            if(nums[mid] >= (n-mid)){
-                h = mid - 1;
+            if (citations[mid] >= (n - mid)) {
+                right = mid - 1;  // Try to find a higher h-index
+            } else {
+                left = mid + 1;   // Increase the range
             }
-            else l = mid + 1;
         }
 
-        return n -l;
+        return n - left;
     }
 };
