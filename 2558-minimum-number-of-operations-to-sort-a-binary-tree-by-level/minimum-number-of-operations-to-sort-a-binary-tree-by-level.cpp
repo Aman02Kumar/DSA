@@ -19,7 +19,7 @@ public:
         int swaps = 0;
         vector<int> sortedVec = vec;
         
-        sort(begin(sortedVec), end(sortedVec));
+        sort(sortedVec.begin(), sortedVec.end());
 
         unordered_map<int, int> mp; //nums[i] -> i
         for(int i = 0; i < vec.size(); i++) {
