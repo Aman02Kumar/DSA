@@ -22,6 +22,7 @@ public:
         sort(sortedVec.begin(), sortedVec.end());
 
         unordered_map<int, int> mp; //nums[i] -> i
+
         for(int i = 0; i < vec.size(); i++) {
             mp[vec[i]] = i;
         }
@@ -32,7 +33,7 @@ public:
             
             int currIdx = mp[sortedVec[i]];
             mp[vec[i]] = currIdx;
-            mp[vec[currIdx]] = i;
+            // mp[vec[currIdx]] = i;
             swap(vec[currIdx], vec[i]);
             swaps++;
         }
