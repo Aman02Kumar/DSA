@@ -17,7 +17,7 @@ class Solution {
 public:
     int countMinSwapsToSort(vector<int>& vec) {
         int swaps = 0;
-        vector<int> sortedVec(begin(vec), end(vec));
+        vector<int> sortedVec = vec;
         
         sort(begin(sortedVec), end(sortedVec));
 
