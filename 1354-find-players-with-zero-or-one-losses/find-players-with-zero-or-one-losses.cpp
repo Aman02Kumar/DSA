@@ -25,8 +25,10 @@ public:
             
         }
         
-        sort(begin(notLost), end(notLost));
-        sort(begin(oneLos), end(oneLos));
+        // sort(begin(notLost), end(notLost));
+        sort(notLost.begin(),notLost.end());
+        // sort(begin(oneLos), end(oneLos));
+        sort(oneLos.begin(),oneLos.end());
         
         return {notLost, oneLos};
     }
