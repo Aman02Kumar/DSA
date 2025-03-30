@@ -3,7 +3,7 @@ public:
     vector<vector<int>> findWinners(vector<vector<int>>& matches) {
         unordered_map<int, int> lost;
         
-        for(auto &it : matches) {
+        for(auto it : matches) {
             int lose = it[1];
             lost[lose]++;
         }
@@ -11,7 +11,7 @@ public:
         vector<int> notLost;
         vector<int> oneLos;
         
-        for(auto &it : matches) {
+        for(auto it : matches) {
             int lose = it[1];
             int win  = it[0];
             
