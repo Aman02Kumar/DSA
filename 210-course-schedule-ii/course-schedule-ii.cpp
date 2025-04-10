@@ -38,7 +38,7 @@ public:
         if (count == numCourses) {
             return ans;
         } else {
-            return vector<int>();
+            return {};
         }
     }
 };
