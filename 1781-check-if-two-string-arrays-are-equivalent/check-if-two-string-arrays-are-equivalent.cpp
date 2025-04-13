@@ -12,16 +12,9 @@ public:
             b+=it;
         }
 
-        int i =0; int j =0;
         if(a.length() != b.length()) return false;
 
-        while(i<a.length()){
-            if(a[i] != b[j]) return false;
-            i++;
-            j++;
-        }
-
-        return true;
+        return a==b;
 
 
     }
