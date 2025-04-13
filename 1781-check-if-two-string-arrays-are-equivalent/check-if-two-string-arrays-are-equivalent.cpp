@@ -4,16 +4,12 @@ public:
         
         string a ="";
         for(auto it : word1){
-            for(auto x : it){
-                a.push_back(x);
-            }
+            a+=it;
         }
 
         string b ="";
         for(auto it : word2){
-            for(auto x : it){
-                b.push_back(x);
-            }
+            b+=it;
         }
 
         int i =0; int j =0;
