@@ -2,26 +2,27 @@ class Solution {
 public:
     int trap(vector<int>& height) {
         
-        int n = height.size();
-        vector<int> lft(n), rit(n);
-
-        for(int i=0;i<height.size();i++)
-        {
-            if(i==0) lft[i] = height[i];
-            else lft[i] = max(lft[i-1], height[i]);
-        }
-        for(int i=height.size() - 1;i>=0;i--)
-        {
-            if(i == height.size() -1) rit[i] = height[i];
-            else rit[i] = max(rit[i+1], height[i]);
-        }
-
-
-        int trapWater = 0;
-        for(int i=0;i<height.size();i++)
-        {
-            trapWater+= min(lft[i],rit[i]) - height[i];
-        }
-        return trapWater;
+  int n = height.size();
+  int left = 0, right = n - 1;
+  int res = 0;
+  int maxLeft = 0, maxRight = 0;
+  while (left <= right) {
+    if (height[left] <= height[right]) {
+      if (height[left] >= maxLeft) {
+        maxLeft = height[left];
+      } else {
+        res += maxLeft - height[left];
+      }
+      left++;
+    } else {
+      if (height[right] >= maxRight) {
+        maxRight = height[right];
+      } else {
+        res += maxRight - height[right];
+      }
+      right--;
     }
+  }
+  return res;
+}
 };
