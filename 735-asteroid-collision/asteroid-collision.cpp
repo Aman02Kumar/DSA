@@ -1,12 +1,9 @@
 class Solution {
 public:
     vector<int> asteroidCollision(vector<int>& arr) {
-        
 
         vector<int> st;
-
         for(int i = 0 ; i < arr.size();i++){
-
             if(arr[i]> 0 ) {
                 st.push_back(arr[i]);
             }
