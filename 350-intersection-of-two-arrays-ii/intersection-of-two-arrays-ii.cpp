@@ -1,22 +1,24 @@
 class Solution {
 public:
     vector<int> intersect(vector<int>& nums1, vector<int>& nums2) {
- unordered_map<int, int> count;
-    vector<int> result;
+        sort(nums1.begin(), nums1.end());
+        sort(nums2.begin(), nums2.end());
 
-    // Count elements in nums1
-    for (int num : nums1) {
-        count[num]++;
-    }
+        vector<int> result;
+        int i = 0, j = 0;
 
-    // Check elements in nums2
-    for (int num : nums2) {
-        if (count[num] > 0) {
-            result.push_back(num);
-            count[num]--;  // reduce the frequency
+        while (i < nums1.size() && j < nums2.size()) {
+            if (nums1[i] == nums2[j]) {
+                result.push_back(nums1[i]);
+                i++;
+                j++;
+            } else if (nums1[i] < nums2[j]) {
+                i++;
+            } else {
+                j++;
+            }
         }
-    }
 
-    return result;
-}
+        return result;
+    }
 };
