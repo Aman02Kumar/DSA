@@ -9,14 +9,13 @@ public:
 
         int i = 0;
         int j = 0;
-        // Best example to understand the use of count variable - {2, 1, 2, 1},
-        // output : 6
+       
         while (j < n) {
 
-            if (nums[j] % 2 != 0) { // ODD
+            if (nums[j] % 2 != 0) {
                 oddCount++;
-                count = 0; // We need to reset this to avoid over counting.
-                           // Example : [1,1,2,1,1], k = 3
+                count = 0;
+                        
             }
 
             while (oddCount >= k) {
