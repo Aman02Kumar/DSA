@@ -13,7 +13,7 @@ public:
         while( j < n){
             m[nums[j]]++;
 
-            if(m.size() > k){
+            if(m.size() >= k){
                 while(m.size() > k){
                     m[nums[i]]--;
                     if(m[nums[i]] == 0){
