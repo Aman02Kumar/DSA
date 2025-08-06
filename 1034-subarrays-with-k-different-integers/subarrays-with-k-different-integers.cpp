@@ -13,16 +13,15 @@ public:
         while( j < n){
             m[nums[j]]++;
 
-            if(m.size() >= k){
-                while(m.size() > k){
+            while(m.size() > k){
                     m[nums[i]]--;
                     if(m[nums[i]] == 0){
                         m.erase(nums[i]);
                     }
                     i++;
-                }
             }
-            count = count + j-i+1;
+            
+            count += j-i+1;
             j++;
         }
 
