@@ -1,25 +1,39 @@
 class Solution {
 public:
-    int atMost(vector<int>& nums, int k) {
-        int i = 0, count = 0;
-        for (int j = 0; j < nums.size(); ++j) {
-            if (nums[j] % 2 == 1) {
-                k--;  // count odd numbers
-            }
+    int numberOfSubarraysLessThan_K(vector<int>& nums, int k) {
+    
+        int left = 0,right = 0,sum = 0,cnt = 0;
 
-            while (k < 0) {
-                if (nums[i] % 2 == 1) {
-                    k++;
-                }
-                i++;
-            }
+        if( k < 0)
+        return 0;
 
-            count += j - i + 1;
+        while(right < nums.size()){
+
+            sum += nums[right];  // if odd returns 1 , else 0
+
+            while(sum > k){
+                sum -= nums[left];
+                left++;
+            }
+            if(sum <= k)
+            cnt = cnt + right - left + 1;
+
+            right++;
         }
-        return count;
+        return cnt;
     }
 
     int numberOfSubarrays(vector<int>& nums, int k) {
-        return atMost(nums, k) - atMost(nums, k - 1);
+
+        for(int i=0;i<nums.size();i++){
+            if(nums[i] % 2 == 0){
+                nums[i] = 0;
+            }
+            else{
+                nums[i] = 1;
+            }
+        }
+
+        return numberOfSubarraysLessThan_K(nums,k) - numberOfSubarraysLessThan_K(nums,k-1);
     }
 };
