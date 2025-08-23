@@ -1,33 +1,29 @@
-/**
- * Definition for a binary tree node.
- * struct TreeNode {
- *     int val;
- *     TreeNode *left;
- *     TreeNode *right;
- *     TreeNode() : val(0), left(nullptr), right(nullptr) {}
- *     TreeNode(int x) : val(x), left(nullptr), right(nullptr) {}
- *     TreeNode(int x, TreeNode *left, TreeNode *right) : val(x), left(left), right(right) {}
- * };
- */
 class Solution {
 public:
-    TreeNode* build(vector<int> nums, int start , int end){
-        if(start> end)return NULL;
-       
-        int maxindex = start ;
-        for(int i = start +1 ; i <= end ; i++){
-            if(nums[i] > nums[maxindex])
-                 maxindex = i;
-        }
-        TreeNode * maxx = new TreeNode(nums[maxindex]);
-
-        maxx->left = build(nums,start,maxindex-1);
-        maxx->right = build(nums, maxindex+1 , end);
-        return  maxx;
-    }
     TreeNode* constructMaximumBinaryTree(vector<int>& nums) {
-        // if(nums) return NULL;
-        TreeNode* root = build(nums,0,nums.size()-1);
-        return root;
+        stack<TreeNode*> st;
+
+        for (int num : nums) {
+            TreeNode* curr = new TreeNode(num);
+
+            // Pop smaller elements → they become left child
+            while (!st.empty() && st.top()->val < num) {
+                curr->left = st.top();
+                st.pop();
+            }
+
+            // After popping, if stack still has bigger parent
+            if (!st.empty()) {
+                st.top()->right = curr;
+            }
+
+            st.push(curr);
+        }
+
+        // The root is at the bottom of stack
+        while (st.size() > 1) {
+            st.pop();
+        }
+        return st.top();
     }
 };
