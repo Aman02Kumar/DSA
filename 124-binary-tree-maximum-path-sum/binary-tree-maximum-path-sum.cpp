@@ -13,15 +13,17 @@ class Solution {
 public:
     int find(TreeNode * root , int &sum){
 
-        if(root == NULL) return  0;
+        if(!root) return 0;
 
-        int ls = max(0, find(root->left , sum)) ;
-        int rs = max(0, find(root->right ,sum));
+        int ls = max(0,find(root->left,sum));
+        int rs = max(0,find(root->right,sum));
 
-        sum = max(ls + rs + root->val , sum);
-        return  max(ls,rs )+ root->val ;
+        sum = max(sum ,(root->val + ls + rs) );
+
+        return root->val + max(ls,rs);
     }
-    int maxPathSum(TreeNode* root) {
+    int maxPathSum(TreeNode* root) {;
+        
         int sum = INT_MIN;
         find(root,sum);
         return sum;
