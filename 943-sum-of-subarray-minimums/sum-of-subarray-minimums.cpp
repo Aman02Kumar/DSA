@@ -6,7 +6,7 @@ public:
         stack<int> st1;
 
         for(int i = n-1 ; i >= 0 ; i--){
-            while(!st1.empty() && arr[st1.top()] >= arr[i])
+            while(!st1.empty() && arr[st1.top()] > arr[i])
                 st1.pop();
             nse[i] = st1.empty() ? n : st1.top();
             st1.push(i);    
@@ -20,7 +20,7 @@ public:
         stack<int> st2;
 
         for(int i = 0 ; i <n ; i++){
-            while(!st2.empty() && arr[st2.top()] > arr[i])
+            while(!st2.empty() && arr[st2.top()] >= arr[i])
                 st2.pop();
             pse[i] = st2.empty() ? -1 : st2.top();
             st2.push(i);    
@@ -37,7 +37,7 @@ public:
             int left = i - psee[i];
             int right = nse[i] - i;
 
-            total = (total + (right*left* 1LL * arr[i] )%mod)%mod ;
+            total = (total + (right*left* 1LL * arr[i] )  %mod   )  %mod ;
 
 
         }
