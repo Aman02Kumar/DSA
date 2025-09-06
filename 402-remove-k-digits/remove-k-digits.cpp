@@ -4,12 +4,11 @@ public:
         int n = num.size();
         stack<char> s;
 
-
     //we iterate over each element of string and run while loop for every element and pop the stack if while condition is true
     //if while is false -> we simply push the num[i] into the stack
 
     for(int i = 0; i<n; i++){
-        while( !s.empty() && k > 0 && ( s.top() - '0' ) > ( num[i] - '0' ) ){
+        while( !s.empty() && k > 0 && ( s.top() >  num[i] ) ){
             s.pop();
             k--;
         }
