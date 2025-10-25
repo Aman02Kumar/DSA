@@ -2,17 +2,15 @@ class Solution {
 public:
     string makeFancyString(string s) {
         
-        string ans ;
-        ans+=s[0];
-        ans+=s[1];
-        if(s.length() <3) return s;
-
-        for(int i = 2;i<s.length();i++){
-            if(s[i-1] != s[i] || s[i] != s[i-2]){
-                ans+=s[i];
+        string ans ="" ;
+        for(char c : s ){
+            int n = ans.size();
+            if (n >= 2 && ans[n - 1] == c && ans[n - 2] == c){
+                continue;
             }
-
+            ans += c;
         }
+        
         return ans;
     }
 };
