@@ -1,24 +1,19 @@
 class Solution {
 public:
     int totalMoney(int n) {
-        
-        int m = 1 ;
-        int sum = 0;
-        int w = 0;
-        while(n){
-            sum += m ;
-            w = m+1;
+        int sum=0;
+        int start=1;
+        int count=0;
+        int x=1;
+        while(n>0){
+            sum+=start;
+            start++;
             n--;
-            m++;
-            int cnt = 6;
-            while(n && cnt){
-                sum += w;
-                w++;
-                n--;
-                cnt--;
-                
+            count++;
+            if(count%7==0){
+                x++;
+                start=x;
             }
-
         }
         return sum;
     }
