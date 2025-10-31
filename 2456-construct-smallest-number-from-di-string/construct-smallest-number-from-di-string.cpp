@@ -1,20 +1,25 @@
 class Solution {
 public:
-    bool find(string &p, string &s){
-        for(int i = 0 ; i<p.size();i++){
-            if((p[i] =='I' && s[i] > s[i+1] ) || ( p[i] =='D' && s[i] < s[i+1]) )   return false;
-        }
-        return true;
-    }
     string smallestNumber(string p) {
-        string s ="";
-        int n = p.size();
-        for(int i = 1 ; i<= n+1 ;i++){
-            s.push_back(i+ '0');
+        stack<int> st;
+        int cnt = 1;
+        st.push(cnt);
+        string ans = "";
+
+        for (auto i : p) {
+            if (i == 'I') {
+                while (!st.empty()) {
+                    ans += st.top() + '0';
+                    st.pop();
+                }
+            }
+            cnt++;
+            st.push(cnt);
         }
-        while(!find(p,s)){
-            next_permutation(begin(s),end(s));
+        while (!st.empty()) {
+            ans += st.top() + '0';
+            st.pop();
         }
-        return s;
+        return ans;
     }
 };
