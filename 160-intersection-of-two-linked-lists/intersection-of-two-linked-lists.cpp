@@ -8,17 +8,14 @@
  */
 class Solution {
 public:
-    ListNode *getIntersectionNode(ListNode *headA, ListNode *headB) {
-        
-        if(!headA || !headB ) return NULL;
-        ListNode * h1 = headA;
-        ListNode * h2 = headB;
+    ListNode* getIntersectionNode(ListNode* headA, ListNode* headB) {
 
-        while(h1!=h2){
-            h1 = (h1 == NULL) ? headB : h1->next;
-            h2 = (h2 == NULL) ? headA : h2->next;
+        ListNode* h = headA;
+        ListNode* j = headB;
+        while (h != j) {
+            h = h == NULL ? headB : h->next;
+            j = j == NULL ? headA : j->next;
         }
-
-        return h1;
+        return h;
     }
 };
