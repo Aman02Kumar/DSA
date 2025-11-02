@@ -15,7 +15,7 @@ public:
                 sum -= nums[left];
                 left++;
             }
-            if(sum <= k)
+            
             cnt = cnt + right - left + 1;
 
             right++;
