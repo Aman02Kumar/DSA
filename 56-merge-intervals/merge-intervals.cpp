@@ -2,19 +2,16 @@ class Solution {
 public:
     vector<vector<int>> merge(vector<vector<int>>& arr) {
         
-        vector<vector<int>> ans;
-        int n = arr.size();
         sort(arr.begin(),arr.end());
 
-        for(int i = 0 ;i < n ;i++){
+        vector<vector<int>> ans;
 
-            if(ans.empty()   || ans.back()[1] < arr[i][0]){
-                ans.push_back(arr[i]);
-            }
+        for(auto x : arr){
 
-            else {
-                ans.back()[1] = max(ans.back()[1], arr[i][1]);
+            if(ans.empty() || ans.back()[1] < x[0]){
+                ans.push_back(x);
             }
+            else ans.back()[1] = max(ans.back()[1] , x[1]);
         }
         return ans;
     }
