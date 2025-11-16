@@ -12,7 +12,7 @@ public:
         
         ListNode* f = head;
         ListNode* s = head;
-        if (!head || !head->next) return false;
+        // if (!head || !head->next) return false;
         while(f && f->next){
 
             f= f->next->next;
