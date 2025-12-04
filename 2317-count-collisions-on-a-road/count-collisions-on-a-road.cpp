@@ -1,33 +1,48 @@
 class Solution {
-
 public:
     int countCollisions(string directions) {
-        int n = directions.size();
-        bool sl = false;
-        int right =0, ans=0;
-        for(int i=0; i<n; i++){
-            if(directions[i]=='S'){
-                sl = true;
-                ans += right;
-                right =0;
+        int n=directions.size();
+        int collisions=0;
+        
+        stack<char>st;
+        st.push(directions[0]);
+        for(int i=1;i<n;i++){
+            if(st.top()=='R' && directions[i]=='L'){
+                collisions+=2;
+                st.pop();
+                st.push('S');
+                st.push('S');
             }
-            else if(directions[i]=='L'){
-               if(right){
-                   right--;
-                   ans+=2;
-                   ans+= right;
-                   right = 0;
-                   sl = true;
-               }
-               else if(sl){
-                   ans++;
-               }
-           }
-           else{
-               right++;
-           }
-
+            else if(st.top()=='S' && directions[i]=='L'){
+                collisions+=1;
+                st.push('S');
+            }
+            else if(st.top()=='R' && directions[i]=='S'){
+                collisions+=1;
+                st.pop();
+                st.push('S');
+                st.push('S');
+                
+            }
+            else{
+                st.push(directions[i]);
+            }
         }
-        return ans;
+        int count=0;
+        
+        while(!st.empty() && st.top()=='R'){
+            st.pop();
+        }
+        while(!st.empty()){
+            if(st.top()=='R'){
+                count+=1;
+                
+            }
+            
+                
+            
+            st.pop();
+        }
+        return collisions+count;
     }
 };
