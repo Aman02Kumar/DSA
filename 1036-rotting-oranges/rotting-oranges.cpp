@@ -1,43 +1,54 @@
 class Solution {
 public:
     int orangesRotting(vector<vector<int>>& grid) {
-        // we can only use bfs in this question
-        int n = grid.size() ;
-        int m = grid[0].size() ;
-        vector<vector<int>> visited(n , vector<int> (m , 0)) ;
-        queue<pair<pair<int , int> , int>> q ;
-         for(int i=0; i<n; i++){
-            for(int j=0; j<m; j++){
-               if(grid[i][j] == 2){
-                  q.push({{i , j} , 0 }) ;
-                   visited[i][j] = 2 ;
-               }
-            }
-         }
-        int maxtime = 0 ;
-        int delx[] = {-1,0,1,0} ;
-        int dely[] = {0,-1,0,1} ;
-          while(!q.empty()){
-            int x = q.front().first.first ;
-            int y = q.front().first.second ;
-            int time = q.front().second ;
-            maxtime = max(maxtime , time) ;
-            q.pop() ;
-            for(int i=0; i<4; i++){
-                int row = x+delx[i] ;
-                int col = y+dely[i] ;
-                if(row>=0 && col>=0 && row<n && col<m && 
-                visited[row][col] != 2 && grid[row][col] == 1){
-                    visited[row][col] = 2 ;
-                    q.push({{row , col} , time+1}) ;
+        
+        int n = grid.size();
+        int m = grid[0].size();
+        int vis[n][m];
+
+        queue <pair<pair<int,int>,int >> q;
+        int t = 0 ;
+        int fresh = 0 ;
+
+        for(int i = 0 ; i < n ; i++){
+            for(int j = 0 ; j < m ; j++){
+
+                if(grid[i][j]==2 ){
+                    q.push({{i,j},t});
+                    vis[i][j]=1;
+                }
+                else {
+                    vis[i][j]=0;
+                    if(grid[i][j]==1)
+                        fresh++;
                 }
             }
-        }  
-        for(int i=0; i<n; i++){
-            for(int j=0; j<m; j++){
-                if(grid[i][j] == 1 && visited[i][j] != 2)return -1 ;
+        }
+        while(!q.empty()){
+            int r = q.front().first.first;
+            int c = q.front().first.second;
+            int tm = q.front().second;
+
+            t = max(t,tm);
+
+            int dr[] = {1,0,-1,0};
+            int dc[] = {0,1,0,-1};
+            q.pop();
+
+            for(int i = 0 ; i < 4;i++){
+
+                int nr = r + dr[i];
+                int nc = c + dc[i];
+
+                if( nc >= 0 && nr>=0 && nc < m && nr < n && vis[nr][nc] == 0 && grid[nr][nc]==1){
+                    vis[nr][nc]=1;
+                    q.push({{nr,nc},t+1});
+                    fresh--;
+                }
             }
         }
-         return maxtime ;
+        if(fresh!=0)return -1;
+
+        return t;
     }
 };
