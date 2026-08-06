@@ -1,44 +1,56 @@
 class Solution {
 public:
-    void bfs(int row,int col,vector<vector<char>>& grid,vector<vector<int>>& vis){
-        int n=grid.size();
-        int m=grid[0].size();
-        vis[row][col]=1;    //starting point
-        queue<pair<int,int>> q;
-        q.push({row,col});
-        while(!q.empty()){
-            int row=q.front().first;
-            int col=q.front().second;
-            q.pop();
-            //traverse in the neighbours and mark them in vis
-            for(int deltarow=-1;deltarow<=1;deltarow++){
-                for(int deltacol=-1;deltacol<=1;deltacol++){
-                    int nrow=row+deltarow;     //neighbour_row
-                    int ncol=col+deltacol;     //neighbour_col
-                    //check for out of bound cases - abs waali condition striver missed 
-                    if((abs(deltarow-deltacol)==1) && nrow>=0 && nrow<n && ncol>=0 && ncol<m && 
-                                grid[nrow][ncol]=='1' && vis[nrow][ncol]==0){
-                        vis[nrow][ncol]=1;
-                        q.push({nrow,ncol});
-                    }
-                }
-            }
 
-        }
-    }
-    int numIslands(vector<vector<char>>& grid) {
-        int n=grid.size();
-        int m=grid[0].size();
-        int count=0;
-        vector<vector<int>> vis(n,vector<int>(m,0));
-        for(int row=0;row<n;row++){
-            for(int col=0;col<m;col++){
-                if(!vis[row][col] && grid[row][col]=='1'){
-                    count++;
-                    bfs(row,col,grid,vis);
+    void bfs(int r , int c , vector<vector<char>>& grid, vector<vector<int>>& vis){
+
+        queue<pair<int,int>> q;
+        q.push({r,c});
+        vis[r][c]= 1;
+        int n = grid.size();
+        int m = grid[0].size();
+
+        while(!q.empty()){
+
+            int rr = q.front().first;
+            int cc = q.front().second;
+
+            q.pop();
+            int dr[] = {1,0,-1,0};
+            int dc[] = {0,1,0,-1};
+            for(int i = 0 ; i<4;i++){
+                int nr = rr + dr[i];
+                int nc = cc + dc[i];
+
+                if(nr >=0 && nr <n && nc >=0 && nc <m && grid[nr][nc]=='1' && vis[nr][nc]==0 ){
+
+                    vis[nr][nc]=1;
+                    q.push({nr,nc});
                 }
             }
         }
-        return count;
+        
+    }
+
+    int numIslands(vector<vector<char>>& grid) {
+
+        int n = grid.size();
+        int m = grid[0].size();
+
+        vector<vector<int>> vis(n,vector<int>(m,0));
+        int cnt = 0 ;
+
+        for(int i = 0 ; i < n ; i++){
+            for(int j  = 0 ; j< m;j++){
+
+                if(vis[i][j]==0 && grid[i][j] == '1'){
+    
+                    bfs(i,j,grid,vis);
+                    cnt++;
+                }
+            }
+        }
+        return cnt;
+
+        
     }
 };
