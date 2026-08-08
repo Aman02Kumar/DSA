@@ -1,29 +1,42 @@
 class Solution {
 public:
-    bool dfs(int n , vector<vector<int>> & graph,vector<int>&color,int cc){
 
-        color[n]=cc;
-        for(auto i : graph[n]){
+    bool bfs(int i , vector<int>&vis , vector<vector<int>> & graph){
 
-            if(color[i]==-1){
-                if(!dfs(i,graph,color,1-cc)){
+        queue<int> q;
+        q.push(i);
+        vis[i]=0;
+
+        while(!q.empty()){
+
+            int n = q.front();
+            q.pop();
+
+            for(auto it : graph[n]){
+                if(vis[it] == -1 ){
+                    vis[it] = 1 - vis[n];
+                    q.push(it);
+                }
+                else if(vis[it] == vis[n]){
                     return false;
                 }
             }
-            else if(color[i]==cc) return false;
         }
         return true;
     }
     bool isBipartite(vector<vector<int>>& graph) {
         
         int v = graph.size();
-        vector<int>color(v,-1);
+        vector<int>vis(v,-1);
 
-        for(int i = 0 ; i < v ; i++){
-            if(color[i]==-1){
-                if(!dfs(i,graph,color,0)) return false;
+        for(int i = 0 ; i <  v ; i++){
+
+            if(vis[i]==-1 && !bfs(i,vis,graph)){
+                return false;
             }
         }
-    return true;
+        return true;
+
+                
     }
 };
