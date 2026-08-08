@@ -1,23 +1,15 @@
 class Solution {
 public:
 
-    bool bfs(int i , vector<int>&vis , vector<vector<int>> & graph){
+    bool dfs(int c, int i , vector<int>&vis , vector<vector<int>> & graph){
 
-        queue<int> q;
-        q.push(i);
-        vis[i]=0;
-
-        while(!q.empty()){
-
-            int n = q.front();
-            q.pop();
-
-            for(auto it : graph[n]){
-                if(vis[it] == -1 ){
-                    vis[it] = 1 - vis[n];
-                    q.push(it);
-                }
-                else if(vis[it] == vis[n]){
+        vis[i] = c;
+        for(auto it : graph[i]){
+            if(vis[it] == vis[i]){
+                return false;
+            }
+            else if(vis[it] == -1){
+                if(!dfs(1-c,it,vis,graph)){
                     return false;
                 }
             }
@@ -31,7 +23,7 @@ public:
 
         for(int i = 0 ; i <  v ; i++){
 
-            if(vis[i]==-1 && !bfs(i,vis,graph)){
+            if(vis[i]==-1 && !dfs(0,i,vis,graph)){
                 return false;
             }
         }
