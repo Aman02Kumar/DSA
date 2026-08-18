@@ -1,28 +1,29 @@
 class Solution {
 public:
     void merge(vector<int>& a, int n, vector<int>& b, int m) {
-        
-        int i=0,j=0;
-        while(i<n && j < m){
 
-            if(a[i] <= b[j]){
-                i++;
+        int i = n - 1;
+        int j = m - 1;
+        int k = n + m - 1;
+
+        while(i >= 0 && j >= 0) {
+
+            if(a[i] > b[j]) {
+                a[k] = a[i];
+                i--;
             }
-            else if(a[i] > b[j]){
-                int x = a[i];
-                a[i] = b[j];
-                b[j] = x;
-                sort(b.begin(),b.end());
-                i++;
+            else {
+                a[k] = b[j];
+                j--;
             }
-            
-        }
-          while (j < m) {
-            a[i] = b[j];
-            i++;
-            j++;
+
+            k--;
         }
 
-
+        while(j >= 0) {
+            a[k] = b[j];
+            j--;
+            k--;
+        }
     }
 };
